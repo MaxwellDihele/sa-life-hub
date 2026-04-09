@@ -1,0 +1,24 @@
+---
+// src/components/StepList.astro
+// Usage:
+//   <StepList color="blue" steps={[
+//     "Go to srd.sassa.gov.za",
+//     "Enter your ID number",
+//   ]} />
+
+export interface Props {
+  steps: string[];
+  color?: 'gold' | 'blue' | 'green';
+}
+
+const { steps, color = 'gold' } = Astro.props;
+---
+
+<ul class="step-list">
+  {steps.map((step, i) => (
+    <li>
+      <span class={`step-num ${color !== 'gold' ? color : ''}`}>{i + 1}</span>
+      {step}
+    </li>
+  ))}
+</ul>

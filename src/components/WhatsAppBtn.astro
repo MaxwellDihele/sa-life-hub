@@ -1,0 +1,44 @@
+---
+// src/components/WhatsAppBtn.astro
+// Usage: <WhatsAppBtn key="sassa" label="Share Guide" />
+
+export interface Props {
+  shareKey: string;
+  label?: string;
+  full?: boolean;   // full width
+  small?: boolean;  // smaller padding
+}
+
+const {
+  shareKey,
+  label = '💬 Share on WhatsApp',
+  full = false,
+  small = false,
+} = Astro.props;
+---
+
+<button
+  class:list={['btn btn-wa', { 'btn-full': full, 'btn-sm': small }]}
+  data-wa-key={shareKey}
+  aria-label={label}
+>
+  {label}
+</button>
+
+<style>
+  .btn-full { width: 100%; justify-content: center; }
+  .btn-sm   { font-size: 0.72rem; padding: 8px 12px; }
+</style>
+
+<script>
+  // Wire all WhatsApp buttons on the page via delegation
+  // (BaseLayout already defines window.shareWhatsApp)
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('[data-wa-key]') as HTMLButtonElement | null;
+    if (!btn) return;
+    const key = btn.getAttribute('data-wa-key');
+    if (key && typeof (window as any).shareWhatsApp === 'function') {
+      (window as any).shareWhatsApp(key);
+    }
+  });
+</script>

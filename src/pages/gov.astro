@@ -1,0 +1,152 @@
+---
+// src/pages/gov.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Government & Admin Help | SA Life Hub"
+  description="Step-by-step guides for SASSA SRD grant, NSFAS, UIF claims, Smart ID and passport applications. Free help for South Africans."
+  activeNav="gov"
+>
+
+  <div class="page-header">
+    <a href="/" class="back-btn" aria-label="Back to home">←</a>
+    <div class="page-header-text">
+      <h2>🏛️ Government Help</h2>
+      <p>Step-by-step guides for SASSA, NSFAS, UIF &amp; more</p>
+    </div>
+  </div>
+
+  <div class="section-hero">
+    <div class="pill-row" id="gov-pills">
+      <div class="pill active" data-filter="all">All</div>
+      <div class="pill" data-filter="sassa">SASSA</div>
+      <div class="pill" data-filter="nsfas">NSFAS</div>
+      <div class="pill" data-filter="uif">UIF</div>
+      <div class="pill" data-filter="id">ID &amp; Docs</div>
+    </div>
+  </div>
+
+  <div class="service-list">
+
+    <!-- SASSA SRD -->
+    <div class="service-card gov-item" data-cat="sassa">
+      <div class="service-card-header">
+        <div class="service-icon blue">🏦</div>
+        <h3>SASSA SRD Grant (R370)</h3>
+      </div>
+      <p>Social Relief of Distress grant for unemployed South Africans. Apply online — no office visit needed.</p>
+      <ul class="step-list">
+        <li><span class="step-num blue">1</span>Go to srd.sassa.gov.za on your phone</li>
+        <li><span class="step-num blue">2</span>Enter your ID number &amp; phone number</li>
+        <li><span class="step-num blue">3</span>SASSA sends OTP to verify your identity</li>
+        <li><span class="step-num blue">4</span>Complete the means test questions</li>
+        <li><span class="step-num blue">5</span>Choose payment method (CashSend, bank, PostBank)</li>
+        <li><span class="step-num blue">6</span>Check your status at the same portal monthly</li>
+      </ul>
+      <details>
+        <summary>Common Rejection Reasons &amp; Fixes</summary>
+        <div class="details-body">
+          <strong style="color:var(--white);">Failed Means Test</strong> — You may have income above R624/month on SARS. Check your tax profile.<br/><br/>
+          <strong style="color:var(--white);">Identity Verification Failed</strong> — Visit your nearest DHA office with your green ID book or Smart ID card.<br/><br/>
+          <strong style="color:var(--white);">Banking Details Wrong</strong> — Update at srd.sassa.gov.za within 30 days of rejection.
+        </div>
+      </details>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+        <a class="btn btn-outline" style="font-size:0.75rem;padding:9px 14px;" href="https://srd.sassa.gov.za" target="_blank" rel="noopener">Apply Now →</a>
+        <button class="btn btn-wa" style="font-size:0.75rem;padding:9px 14px;" onclick="shareWhatsApp('sassa')">Share Guide</button>
+      </div>
+    </div>
+
+    <!-- NSFAS -->
+    <div class="service-card gov-item" data-cat="nsfas">
+      <div class="service-card-header">
+        <div class="service-icon gold">🎓</div>
+        <h3>NSFAS Application</h3>
+      </div>
+      <p>National Student Financial Aid for university &amp; TVET college students from households earning under R350,000/year.</p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Register on my.nsfas.org.za (Jan–March window)</li>
+        <li><span class="step-num">2</span>Upload: ID, proof of income, matric results</li>
+        <li><span class="step-num">3</span>Apply to your institution separately</li>
+        <li><span class="step-num">4</span>Accept your institution's admission offer</li>
+        <li><span class="step-num">5</span>NSFAS sends funding decision via SMS</li>
+        <li><span class="step-num">6</span>Allowances paid monthly to your NSFAS wallet</li>
+      </ul>
+      <details>
+        <summary>Appeal a Rejected NSFAS Application</summary>
+        <div class="details-body">
+          You have <strong style="color:var(--gold);">30 days</strong> from rejection to appeal. Log in to myNSFAS → "My Applications" → "Appeal". Attach a motivation letter and supporting documents (proof of unemployment, death certificate if applicable, etc.)
+        </div>
+      </details>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+        <a class="btn btn-outline" style="font-size:0.75rem;padding:9px 14px;" href="https://my.nsfas.org.za" target="_blank" rel="noopener">Apply at NSFAS →</a>
+        <button class="btn btn-wa" style="font-size:0.75rem;padding:9px 14px;" onclick="shareWhatsApp('nsfas')">Share Guide</button>
+      </div>
+    </div>
+
+    <!-- UIF -->
+    <div class="service-card gov-item" data-cat="uif">
+      <div class="service-card-header">
+        <div class="service-icon green">💼</div>
+        <h3>UIF Claims (Retrenchment / Illness)</h3>
+      </div>
+      <p>Unemployment Insurance Fund — if you were retrenched, your employer should have contributed. Claim what's yours.</p>
+      <ul class="step-list">
+        <li><span class="step-num green">1</span>Get UI-19 form from your employer</li>
+        <li><span class="step-num green">2</span>Complete UI-2.8 (banking details form)</li>
+        <li><span class="step-num green">3</span>Take forms + ID to your nearest Labour Centre</li>
+        <li><span class="step-num green">4</span>Or claim online at uFiling.labour.gov.za</li>
+        <li><span class="step-num green">5</span>Attend bi-weekly signing sessions</li>
+        <li><span class="step-num green">6</span>Payments usually within 4–6 weeks</li>
+      </ul>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+        <a class="btn btn-outline" style="font-size:0.75rem;padding:9px 14px;" href="https://ufiling.labour.gov.za" target="_blank" rel="noopener">Claim Online →</a>
+        <button class="btn btn-wa" style="font-size:0.75rem;padding:9px 14px;" onclick="shareWhatsApp('uif')">Share Guide</button>
+      </div>
+    </div>
+
+    <!-- Smart ID -->
+    <div class="service-card gov-item" data-cat="id">
+      <div class="service-card-header">
+        <div class="service-icon blue">🪪</div>
+        <h3>Smart ID Card &amp; Passport</h3>
+      </div>
+      <p>Apply via eHomeAffairs at select banks — no long DHA queue required for most applicants.</p>
+      <ul class="step-list">
+        <li><span class="step-num blue">1</span>Register at ehomeaffairs.gov.za</li>
+        <li><span class="step-num blue">2</span>Complete application &amp; pay online (R140 Smart ID / R400 Passport)</li>
+        <li><span class="step-num blue">3</span>Book appointment at Absa, FNB, or Nedbank</li>
+        <li><span class="step-num blue">4</span>Bring old ID + proof of payment to the bank</li>
+        <li><span class="step-num blue">5</span>Collect at DHA office when SMS arrives (4–12 weeks)</li>
+      </ul>
+      <div style="margin-top:12px;">
+        <a class="btn btn-outline" style="font-size:0.75rem;padding:9px 14px;" href="https://www.ehomeaffairs.gov.za" target="_blank" rel="noopener">Go to eHomeAffairs →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WhatsApp CTA -->
+  <div class="wa-cta">
+    <strong>📲 Share this with someone who needs help</strong>
+    <p>These guides help South Africans navigate government systems for free.</p>
+    <button class="btn btn-wa" onclick="shareWhatsApp('gov')">💬 Share Gov Help Page</button>
+  </div>
+
+  <div class="bottom-spacer"></div>
+</BaseLayout>
+
+<script>
+  // Gov page pill filter
+  document.querySelectorAll('#gov-pills .pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('#gov-pills .pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.getAttribute('data-filter');
+      document.querySelectorAll('.gov-item').forEach(card => {
+        card.style.display = (filter === 'all' || card.getAttribute('data-cat') === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>

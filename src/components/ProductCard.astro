@@ -1,0 +1,47 @@
+---
+// src/components/ProductCard.astro
+// Usage:
+//   <ProductCard
+//     emoji="📄"
+//     thumbVariant="green-grad"
+//     title="Professional CV Bundle"
+//     description="3 modern CV templates..."
+//     price={35}
+//     productId="cv-bundle"
+//     includes={["3 CV templates", "Cover letter"]}
+//   />
+
+export interface Props {
+  emoji: string;
+  thumbVariant: 'green-grad' | 'gold-grad' | 'blue-grad';
+  title: string;
+  description: string;
+  price: number;       // in ZAR (whole rands)
+  productId: string;   // Paystack product slug
+  includes: string[];
+}
+
+const { emoji, thumbVariant, title, description, price, productId, includes } = Astro.props;
+const amountKobo = price * 100;
+---
+
+<div class="product-card">
+  <div class={`product-thumb ${thumbVariant}`}>{emoji}</div>
+  <div class="product-body">
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <ul class="product-includes">
+      {includes.map(item => <li>{item}</li>)}
+    </ul>
+    <div class="product-footer">
+      <div class="price">R{price} <sub>once-off</sub></div>
+      <button
+        class="btn btn-gold"
+        style="font-size:0.75rem;padding:9px 14px;"
+        onclick={`openPaystack('${productId}', ${amountKobo}, '${title}')`}
+      >
+        Buy Now →
+      </button>
+    </div>
+  </div>
+</div>

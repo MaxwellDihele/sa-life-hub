@@ -1,0 +1,54 @@
+---
+// src/components/ScamCard.astro
+// Usage:
+//   <ScamCard
+//     type="scam"          // 'scam' | 'fake'
+//     title="Fake SASSA R1500 grant"
+//     shareKey="scam-sassa-r1500"
+//     date="Active Now"
+//   >
+//     <p slot="body">Description...</p>
+//     <div slot="info">Info box content...</div>
+//   </ScamCard>
+
+export interface Props {
+  type?: 'scam' | 'fake';
+  title: string;
+  shareKey: string;
+  date?: string;
+}
+
+const { type = 'scam', title, shareKey, date = 'Active Now' } = Astro.props;
+const tagLabel = type === 'scam' ? '⚠️ SCAM ALERT' : '⚠️ FAKE NEWS';
+---
+
+<div
+  class="trend-card radar-item scam-card"
+  data-cat="scam"
+  style="flex-direction:column;gap:10px;border-color:rgba(248,113,113,0.25);border-left:3px solid #f87171;"
+>
+  <div style="display:flex;align-items:flex-start;gap:12px;">
+    <div class="trend-emoji">🚫</div>
+    <div class="trend-body" style="flex:1;">
+      <div class="trend-meta">
+        <span class="trend-tag">{tagLabel}</span>
+        <span>{date}</span>
+      </div>
+      <h3>{title}</h3>
+      <slot name="body" />
+      <div
+        class="radar-info-box"
+        style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);border-radius:var(--radius-sm);padding:10px 12px;font-size:0.76rem;line-height:1.6;margin-bottom:10px;"
+      >
+        <slot name="info" />
+      </div>
+      <button
+        class="btn btn-wa"
+        style="font-size:0.72rem;padding:8px 12px;background:#f87171;color:#fff;"
+        data-wa-key={shareKey}
+      >
+        ⚠️ Warn Your Community
+      </button>
+    </div>
+  </div>
+</div>

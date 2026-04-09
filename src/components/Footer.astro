@@ -1,0 +1,58 @@
+---
+// src/components/Footer.astro
+---
+
+<footer>
+  <div class="footer-logo">SA <span>Life</span> Hub</div>
+  <p>South Africa's trusted digital platform for earning, government help &amp; scam alerts. Built by RealMaxG.</p>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/gov">Gov Help</a>
+    <a href="/earn">Earn</a>
+    <a href="/store">Store</a>
+    <a href="/radar">Scam Radar</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="footer-byline">
+    © {new Date().getFullYear()} SA Life Hub · Built by RealMaxG · Not affiliated with SASSA, NSFAS, or any government body.
+  </div>
+</footer>
+
+<style>
+  footer {
+    padding: 32px 20px 40px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .footer-logo span { color: var(--gold); }
+  footer p {
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .footer-links a { font-size: 0.75rem; color: var(--muted); text-decoration: none; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-byline {
+    font-size: 0.72rem;
+    color: var(--border);
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 8px;
+  }
+</style>

@@ -1,0 +1,244 @@
+---
+// src/layouts/BaseLayout.astro
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  activeNav?: string; // 'home' | 'gov' | 'earn' | 'store' | 'radar'
+}
+
+const {
+  title = 'SA Life Hub | Earn. Access. Stay Informed. 🇿🇦',
+  description = 'SA Life Hub — South Africa\'s trusted digital hub for earning opportunities, government assistance, trending updates, and digital products. Built by RealMaxG.',
+  activeNav = 'home',
+} = Astro.props;
+
+// Set PUBLIC_PAYSTACK_KEY in your .env file
+const paystackKey = import.meta.env.PUBLIC_PAYSTACK_KEY ?? 'pk_live_REPLACE_WITH_YOUR_KEY';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="keywords" content="SASSA, NSFAS, UIF, South Africa jobs, side hustle SA, earn online South Africa, CV templates SA" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <title>{title}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/styles/global.css" />
+  <style>
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(14,14,14,0.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: var(--font-head); font-weight: 800; font-size: 1.05rem; letter-spacing: -0.02em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-flag { font-size: 1.3rem; line-height: 1; }
+    .nav-share-btn {
+      background: var(--card-bg); border: 1px solid var(--border);
+      color: var(--white); width: 36px; height: 36px; border-radius: var(--radius-sm);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer;
+    }
+    .nav-share-btn span { width: 16px; height: 2px; background: var(--white); border-radius: 2px; }
+
+    /* ── BOTTOM NAV ── */
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 420px;
+      background: rgba(14,14,14,0.95);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      z-index: 100;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .bottom-nav a {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 10px 4px; font-size: 0.6rem; color: var(--muted);
+      text-decoration: none; gap: 4px; -webkit-tap-highlight-color: transparent; transition: color 0.15s;
+    }
+    .bottom-nav a .nav-icon { font-size: 1.2rem; line-height: 1; }
+    .bottom-nav a.active { color: var(--gold); }
+    .bottom-nav a:hover { color: var(--white); }
+
+    /* ── PAYSTACK MODAL ── */
+    #paystack-modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8); z-index: 200; align-items: flex-end;
+    }
+    .modal-sheet {
+      background: var(--card-bg); border-radius: 20px 20px 0 0;
+      padding: 28px 24px; max-width: 420px; width: 100%; margin: 0 auto;
+      border-top: 1px solid var(--border);
+    }
+    .modal-title  { font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; margin-bottom: 4px; }
+    .modal-sub    { color: var(--muted); font-size: 0.8rem; margin-bottom: 20px; }
+    .modal-price-box { background: var(--black); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 16px; }
+    .modal-price-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 4px; }
+    .modal-price-val { font-family: var(--font-head); font-weight: 800; font-size: 1.6rem; color: var(--gold); }
+    #modal-email {
+      width: 100%; background: var(--black); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 13px 14px; color: var(--white);
+      font-size: 0.88rem; margin-bottom: 12px; outline: none; font-family: var(--font-body);
+    }
+    .modal-note { text-align: center; font-size: 0.7rem; color: var(--muted); margin-top: 12px; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav>
+    <a class="nav-logo" href="/">SA <span>Life</span> Hub</a>
+    <span class="nav-flag">🇿🇦</span>
+    <button class="nav-share-btn" id="nav-share-btn" aria-label="Share this page">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <main>
+    <slot />
+  </main>
+
+  <!-- FOOTER -->
+  <Footer />
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <a href="/"       class={activeNav === 'home'  ? 'active' : ''}><span class="nav-icon">🏠</span><span>Home</span></a>
+    <a href="/gov"    class={activeNav === 'gov'   ? 'active' : ''}><span class="nav-icon">🏛️</span><span>Gov Help</span></a>
+    <a href="/earn"   class={activeNav === 'earn'  ? 'active' : ''}><span class="nav-icon">💰</span><span>Earn</span></a>
+    <a href="/store"  class={activeNav === 'store' ? 'active' : ''}><span class="nav-icon">📦</span><span>Store</span></a>
+    <a href="/radar"  class={activeNav === 'radar' ? 'active' : ''}><span class="nav-icon">⚠️</span><span>Radar</span></a>
+  </nav>
+
+  <!-- PAYSTACK MODAL -->
+  <div id="paystack-modal" role="dialog" aria-modal="true" aria-label="Checkout">
+    <div class="modal-sheet">
+      <div class="modal-title" id="modal-title">Product Name</div>
+      <div class="modal-sub">Secure checkout via Paystack 🔒</div>
+      <div class="modal-price-box">
+        <div class="modal-price-label">Total</div>
+        <div class="modal-price-val" id="modal-price">R35</div>
+      </div>
+      <input id="modal-email" type="email" placeholder="Your email address" autocomplete="email" />
+      <button class="btn btn-gold" style="width:100%;justify-content:center;padding:14px;font-size:0.9rem;" id="modal-pay-btn">
+        💳 Pay with Paystack
+      </button>
+      <button class="btn btn-outline" style="width:100%;justify-content:center;padding:12px;font-size:0.82rem;margin-top:10px;" id="modal-cancel-btn">
+        Cancel
+      </button>
+      <div class="modal-note">Product delivered to your email within 5 minutes ⚡</div>
+    </div>
+  </div>
+
+  <script define:vars={{ paystackKey }}>
+    // ── PAYSTACK ──────────────────────────────
+    const PAYSTACK_KEY = paystackKey;
+    let _meta = {};
+
+    window.openPaystack = function(productId, amountKobo, productName) {
+      _meta = { productId, amountKobo, productName };
+      document.getElementById('modal-title').textContent = productName;
+      document.getElementById('modal-price').textContent = 'R' + (amountKobo / 100).toFixed(0);
+      const modal = document.getElementById('paystack-modal');
+      modal.style.display = 'flex';
+    };
+
+    function closePaystack() {
+      document.getElementById('paystack-modal').style.display = 'none';
+      document.getElementById('modal-email').value = '';
+    }
+
+    document.getElementById('modal-cancel-btn').addEventListener('click', closePaystack);
+    document.getElementById('paystack-modal').addEventListener('click', function(e) {
+      if (e.target === this) closePaystack();
+    });
+
+    document.getElementById('modal-pay-btn').addEventListener('click', function() {
+      const email = document.getElementById('modal-email').value.trim();
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address to receive your product.');
+        return;
+      }
+      if (typeof PaystackPop !== 'undefined') {
+        const handler = PaystackPop.setup({
+          key: PAYSTACK_KEY,
+          email,
+          amount: _meta.amountKobo,
+          currency: 'ZAR',
+          ref: 'SALHUB_' + Date.now(),
+          metadata: { product: _meta.productId },
+          callback: function() {
+            closePaystack();
+            alert('✅ Payment successful! Your product will be sent to ' + email + ' within 5 minutes.');
+          },
+          onClose: function() {}
+        });
+        handler.openIframe();
+      } else {
+        const url = `https://paystack.com/pay/${_meta.productId}?email=${encodeURIComponent(email)}`;
+        closePaystack();
+        window.open(url, '_blank');
+      }
+    });
+
+    // Load Paystack SDK
+    const ps = document.createElement('script');
+    ps.src = 'https://js.paystack.co/v1/inline.js';
+    ps.async = true;
+    document.head.appendChild(ps);
+
+    // ── WHATSAPP SHARE ─────────────────────────
+    const shareMessages = {
+      home:             "🇿🇦 *SA Life Hub* — South Africa's #1 digital hub!\n\n✅ SASSA & NSFAS grant updates\n⚠️ Scam Radar — fake news busted\n📊 SARS tax help\n💰 Real ways to earn online\n\nCheck it out 👉 [link]",
+      gov:              "🏛️ *SA Life Hub — Government Help*\n\nStep-by-step guides for SASSA, NSFAS, UIF, Smart ID and more!\n\nGet free help 👉 [link]",
+      earn:             "💰 *Earn Online in South Africa — Real Verified Opportunities*\n\nNo scams. No upfront fees. Real income from your phone.\n\nSee the full guide 👉 [link]",
+      store:            "📦 *SA Life Hub Digital Store*\n\nCV templates, Freelance packs & Business Kits — instant delivery via WhatsApp!\n\nBrowse now 👉 [link]",
+      radar:            "⚠️ *SA Life Hub — Scam Radar & SA Updates*\n\nSASSA grant updates, SARS tax dates, and active scam alerts — all in one place.\n\nStay protected 👉 [link]",
+      sassa:            "🏦 *SASSA SRD Grant Guide (R370)*\n\nStep-by-step how to apply at srd.sassa.gov.za!\n\nGet the full guide 👉 [link]",
+      nsfas:            "🎓 *NSFAS Application Guide*\n\nApply online + how to appeal a rejection. Full guide 👉 [link]",
+      uif:              "💼 *UIF Claim Guide*\n\nClaim your UIF after retrenchment — step by step. Full guide 👉 [link]",
+      'earn-digital':   "💰 *Earn R300–R1,200/week selling digital products on WhatsApp*\n\nNo upfront cost. Full guide 👉 [link]",
+      'earn-tasks':     "📱 *Earn from your phone with Clickworker & Remotasks*\n\nSimple tasks, weekly payout. Start free! Guide 👉 [link]",
+      'earn-write':     "✍️ *Earn R500–R3,000/month freelance writing from SA*\n\nNo degree needed. Full guide 👉 [link]",
+      'sassa-dates':    "💳 *SASSA SRD April 2025 Payment Dates Confirmed*\n\n📅 Pay window: 25 March – 30 April 2025\n📞 SASSA Helpline: 0800 60 10 11 (free)\n🌐 Check status: srd.sassa.gov.za\n\nForward this to family & friends 👉 [link]",
+      'sassa-reapply':  "🔄 *SASSA SRD: Some People Need to Reapply!*\n\nIf your status shows 'Lapsed' or you haven't been paid in 3+ months, you must reapply at srd.sassa.gov.za\n\nShare with anyone affected 👉 [link]",
+      'sassa-amounts':  "👴 *2025 SASSA Grant Amounts (Updated)*\n\n👴 Older Person's Grant: R2,185/month\n👶 Child Support: R530/month\n♿ Disability Grant: R2,185/month\n\nShare so people know what they should be getting 👉 [link]",
+      'nhi':            "🏥 *NHI Update 2025 — What Changes for You?*\n\n📌 NHI will NOT remove your medical aid immediately\n\nFull breakdown 👉 [link]",
+      'dha-backlog':    "📋 *Home Affairs Smart ID Backlog — Up to 12 Weeks Wait*\n\nTrack your application at ehomeaffairs.gov.za\n\nShare this update 👉 [link]",
+      'nsfas-delay':    "🎓 *NSFAS Allowance Delays — What to Do*\n\n⚠️ Don't pay anyone to 'fast-track' it — that's a scam!\n\nFull info 👉 [link]",
+      'sars-dates':     "📊 *SARS Tax Filing Season 2025 — Key Dates*\n\n📅 Auto-assessment: July 2025\n📅 Deadline: 20 October 2025\n\nShare with your family & colleagues 👉 [link]",
+      'sars-threshold': "💰 *Do You Need to File a SARS Tax Return?*\n\nYou MUST file if you earn above:\n👤 Under 65: R95,750/year\n\nShare this — many people don't know 👉 [link]",
+      'sars-app':       "📱 *File Your SARS Tax Return From Your Phone!*\n\nDownload the SARS MobiApp — no office needed.\n\nGet the app at: sars.gov.za/mobiapp 👉 [link]",
+      'scam-sassa-r1500': "🚨 *SCAM ALERT — Forward to Your Family!*\n\n❌ 'SASSA R1,500 emergency grant' messages on WhatsApp are FAKE\n\n✅ SASSA only communicates via:\n• sassa.gov.za\n• 0800 60 10 11 (free helpline)\n\nShare to protect someone 👉 [link]",
+      'scam-fasttrack':   "🚨 *SCAM ALERT — Share to Protect Others!*\n\n❌ Do NOT pay anyone to 'fast-track' your SASSA or NSFAS payment.\n\n🔴 Report to SASSA Fraud: 0800 60 10 11\n\nForward to warn people 👉 [link]",
+      'scam-sars-cancel': "🚨 *FAKE NEWS ALERT!*\n\n❌ 'SARS is cancelling tax numbers' — This is FALSE.\n\n✅ Verify at sars.gov.za or call 0800 00 7277\n\nShare to stop the spread 👉 [link]",
+      'scam-govjobs':     "🚨 *SCAM ALERT — Fake Government Job Ads!*\n\n❌ Any government job asking you to PAY to apply is a SCAM.\n\n✅ Only apply FREE at: dpsa.gov.za/vacancies\n\nWarn your community 👉 [link]",
+      'scam-big':         "🚨 *FAKE NEWS — 'R1,500 Basic Income Grant Approved'*\n\n❌ NOT true. No BIG law has been passed as of April 2025.\n\nShare to stop this fake news 👉 [link]",
+      'scam-radar':       "⚠️ *SA Life Hub — Scam Radar*\n\n🚫 Fake SASSA grants\n🚫 Fast-track payment scams\n🚫 Fake SARS messages\n🚫 Fake government jobs\n\nShare to protect your family 👉 [link]",
+    };
+
+    window.shareWhatsApp = function(key) {
+      const msg = shareMessages[key] || shareMessages['home'];
+      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+    };
+
+    // Nav share button — shares current page
+    document.getElementById('nav-share-btn').addEventListener('click', function() {
+      const path = window.location.pathname.replace('/', '') || 'home';
+      shareWhatsApp(path);
+    });
+  </script>
+</body>
+</html>

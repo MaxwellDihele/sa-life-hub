@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap location (update with your real domain)
+# Sitemap: https://salifehub.co.za/sitemap-index.xml

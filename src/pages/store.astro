@@ -1,0 +1,63 @@
+---
+// src/pages/store.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products } from '../data/products';
+---
+
+<BaseLayout
+  title="Digital Store | SA Life Hub"
+  description="Buy CV templates, freelance starter packs and business kits. Instant delivery via WhatsApp or email. Secure Paystack checkout."
+  activeNav="store"
+>
+  <div class="page-header">
+    <a href="/" class="back-btn" aria-label="Back to home">←</a>
+    <div class="page-header-text">
+      <h2>📦 Digital Store</h2>
+      <p>Instant delivery — pay with card or EFT</p>
+    </div>
+  </div>
+
+  <div class="section-hero green-tint">
+    <p style="font-size:0.78rem;color:var(--muted);">All products delivered to your WhatsApp or email within 5 minutes.</p>
+  </div>
+
+  <div class="store-grid">
+    {products.map(p => (
+      <ProductCard
+        emoji={p.emoji}
+        thumbVariant={p.thumbVariant}
+        title={p.title}
+        description={p.description}
+        price={p.priceRands}
+        productId={p.id}
+        includes={p.includes}
+      />
+    ))}
+
+    <div class="trust-box">
+      <div class="trust-icon">🔒</div>
+      <div class="trust-title">Secure Checkout via Paystack</div>
+      <p>Pay safely by card, EFT, or Instant EFT. We never store your card details. Delivery within 5 minutes to your WhatsApp or email.</p>
+      <div class="trust-tags">
+        <span>✓ Secure</span><span>✓ Instant</span><span>✓ SA-Based</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wa-cta" style="margin-top:8px;">
+    <strong>📲 Share the Digital Store</strong>
+    <p>Know someone who needs a CV or wants to start freelancing?</p>
+    <button class="btn btn-wa" onclick="shareWhatsApp('store')">💬 Share Store</button>
+  </div>
+
+  <div class="bottom-spacer"></div>
+</BaseLayout>
+
+<style>
+  .trust-box { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:16px; text-align:center; }
+  .trust-icon  { font-size:1.3rem; margin-bottom:10px; }
+  .trust-title { font-family:var(--font-head); font-weight:700; font-size:0.88rem; margin-bottom:6px; }
+  .trust-box p { font-size:0.75rem; color:var(--muted); line-height:1.55; }
+  .trust-tags  { display:flex; justify-content:center; gap:12px; margin-top:12px; font-size:0.7rem; color:var(--muted); }
+</style>

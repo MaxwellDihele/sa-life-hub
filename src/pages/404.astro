@@ -1,0 +1,94 @@
+---
+// src/pages/404.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found | SA Life Hub"
+  description="Oops — this page doesn't exist. Head back to SA Life Hub for government help, earning guides and scam alerts."
+  activeNav="home"
+>
+  <style>
+    .not-found {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .nf-emoji { font-size: 4rem; margin-bottom: 20px; line-height: 1; }
+    .nf-code  {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 4rem;
+      letter-spacing: -0.05em;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .nf-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .nf-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 300px;
+      margin-bottom: 28px;
+    }
+    .nf-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 280px;
+    }
+    .nf-quick {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 28px;
+      width: 100%;
+      max-width: 320px;
+    }
+    .nf-quick-link {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 10px;
+      text-decoration: none;
+      color: var(--white);
+      font-size: 0.75rem;
+      text-align: center;
+      transition: all 0.18s;
+    }
+    .nf-quick-link:hover { border-color: var(--gold); color: var(--gold); }
+    .nf-quick-link .ql-icon { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+  </style>
+
+  <div class="not-found">
+    <div class="nf-emoji">🇿🇦</div>
+    <div class="nf-code">404</div>
+    <div class="nf-title">Page Not Found</div>
+    <p class="nf-desc">This page doesn't exist or may have moved. Head back to SA Life Hub — there's plenty to explore.</p>
+
+    <div class="nf-links">
+      <a href="/" class="btn btn-gold" style="justify-content:center;">🏠 Back to Home</a>
+      <a href="/radar" class="btn btn-outline" style="justify-content:center;border-color:#f87171;color:#f87171;">⚠️ Check Scam Radar</a>
+    </div>
+
+    <div class="nf-quick">
+      <a href="/gov"   class="nf-quick-link"><span class="ql-icon">🏛️</span>Gov Help</a>
+      <a href="/earn"  class="nf-quick-link"><span class="ql-icon">💰</span>Earn Online</a>
+      <a href="/store" class="nf-quick-link"><span class="ql-icon">📦</span>Store</a>
+      <a href="/about" class="nf-quick-link"><span class="ql-icon">ℹ️</span>About</a>
+    </div>
+  </div>
+
+  <div class="bottom-spacer"></div>
+</BaseLayout>

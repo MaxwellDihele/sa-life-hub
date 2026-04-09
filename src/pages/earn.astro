@@ -1,0 +1,141 @@
+---
+// src/pages/earn.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Earn Online in South Africa | SA Life Hub"
+  description="Real, verified ways to earn money online in South Africa from your phone. Side hustles, freelancing, micro-tasks — no scams, no upfront fees."
+  activeNav="earn"
+>
+
+  <div class="page-header">
+    <a href="/" class="back-btn" aria-label="Back to home">←</a>
+    <div class="page-header-text">
+      <h2>💰 Earn Online</h2>
+      <p>Real income from your phone — no scams</p>
+    </div>
+  </div>
+
+  <div class="section-hero gold-tint">
+    <p style="font-size:0.78rem;color:var(--muted);">All opportunities verified by RealMaxG. No upfront fees required.</p>
+    <div class="pill-row" id="earn-pills">
+      <div class="pill active" data-filter="all">All</div>
+      <div class="pill" data-filter="phone">Phone Only</div>
+      <div class="pill" data-filter="freelance">Freelance</div>
+      <div class="pill" data-filter="resell">Resell</div>
+    </div>
+  </div>
+
+  <div class="service-list">
+
+    <!-- Digital Products -->
+    <div class="earn-card earn-item" data-cat="resell">
+      <div class="earn-card-top">
+        <span class="earn-badge badge-hot">🔥 HOT</span>
+        <span class="earn-income">R300–R1,200/week</span>
+      </div>
+      <h3>Sell Digital Products on WhatsApp</h3>
+      <p>Create or resell CVs, business plans, and social media packs. No website needed — just WhatsApp and a Paystack link. Perfect for starters.</p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Download a Canva CV template (free)</li>
+        <li><span class="step-num">2</span>Customise it with your name as the creator</li>
+        <li><span class="step-num">3</span>Create a free Paystack payment link (R25–R50/template)</li>
+        <li><span class="step-num">4</span>Post in WhatsApp groups, matric groups, job groups</li>
+        <li><span class="step-num">5</span>Deliver the PDF instantly via WhatsApp</li>
+      </ul>
+      <div class="earn-actions">
+        <a href="/store" class="btn btn-gold" style="font-size:0.75rem;padding:9px 14px;">Get Starter Kit</a>
+        <button class="btn btn-wa" style="font-size:0.75rem;padding:9px 14px;" onclick="shareWhatsApp('earn-digital')">Share</button>
+      </div>
+    </div>
+
+    <!-- Micro-Tasks -->
+    <div class="earn-card earn-item" data-cat="phone">
+      <div class="earn-card-top">
+        <span class="earn-badge badge-free">✅ FREE TO START</span>
+        <span class="earn-income">R500–R3,000/month</span>
+      </div>
+      <h3>Micro-Tasks: Clickworker &amp; Remotasks</h3>
+      <p>Simple AI training tasks — labelling images, transcribing audio, categorising content. Phone-friendly, weekly payouts via PayPal or bank transfer.</p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Register free at clickworker.com or remotasks.com</li>
+        <li><span class="step-num">2</span>Complete the free training modules (1–2 hours)</li>
+        <li><span class="step-num">3</span>Start taking tasks when available</li>
+        <li><span class="step-num">4</span>Withdraw to PayPal (link to Capitec or TymeBank)</li>
+      </ul>
+      <div class="earn-actions">
+        <a class="btn btn-green" style="font-size:0.75rem;padding:9px 14px;" href="https://www.clickworker.com" target="_blank" rel="noopener">Sign Up Free</a>
+        <button class="btn btn-wa" style="font-size:0.75rem;padding:9px 14px;" onclick="shareWhatsApp('earn-tasks')">Share</button>
+      </div>
+    </div>
+
+    <!-- Freelance Writing -->
+    <div class="earn-card earn-item" data-cat="freelance">
+      <div class="earn-card-top">
+        <span class="earn-badge badge-easy">⚡ EASY START</span>
+        <span class="earn-income">R800–R5,000/month</span>
+      </div>
+      <h3>Freelance Writing &amp; Content (SA Focus)</h3>
+      <p>South African content is in demand. Write blog posts, social captions, or product descriptions for small businesses. No degree needed.</p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Create a free Fiverr or PeoplePerHour profile</li>
+        <li><span class="step-num">2</span>Offer "SA-focused" copywriting as your niche</li>
+        <li><span class="step-num">3</span>Write 3 sample pieces (post them as portfolio)</li>
+        <li><span class="step-num">4</span>Charge R150–R500 per article to start</li>
+        <li><span class="step-num">5</span>Scale up as reviews grow</li>
+      </ul>
+      <div class="earn-actions">
+        <a class="btn btn-green" style="font-size:0.75rem;padding:9px 14px;" href="https://www.fiverr.com" target="_blank" rel="noopener">Join Fiverr</a>
+        <button class="btn btn-wa" style="font-size:0.75rem;padding:9px 14px;" onclick="shareWhatsApp('earn-write')">Share</button>
+      </div>
+    </div>
+
+    <!-- Surveys -->
+    <div class="earn-card earn-item" data-cat="phone">
+      <div class="earn-card-top">
+        <span class="earn-badge badge-hot">📱 PHONE ONLY</span>
+        <span class="earn-income">R200–R800/month</span>
+      </div>
+      <h3>Data &amp; Survey Income (SA Apps)</h3>
+      <p>Get paid for sharing anonymised mobile data or completing short surveys. Passive income that runs in the background.</p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Download Survey Junkie or Toluna app</li>
+        <li><span class="step-num">2</span>Complete your profile fully (higher survey matches)</li>
+        <li><span class="step-num">3</span>Set 20 minutes aside daily for surveys</li>
+        <li><span class="step-num">4</span>Redeem points for cash or gift vouchers</li>
+      </ul>
+      <div class="earn-actions">
+        <button class="btn btn-outline" style="font-size:0.75rem;padding:9px 14px;" onclick="alert('Search Survey Junkie in your app store')">Get Apps</button>
+        <button class="btn btn-wa" style="font-size:0.75rem;padding:9px 14px;" onclick="shareWhatsApp('earn-survey')">Share</button>
+      </div>
+    </div>
+
+    <!-- Scam warning -->
+    <div style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);border-left:3px solid #f87171;border-radius:var(--radius-sm);padding:14px;font-size:0.78rem;line-height:1.6;color:var(--muted);margin-top:4px;">
+      🚫 <strong style="color:#f87171;">Scam Warning:</strong> Any "job" asking you to pay upfront fees, buy starter kits, or send gift cards is a scam. Real opportunities never ask for money first.
+    </div>
+
+  </div>
+
+  <div class="wa-cta">
+    <strong>📲 Share real earning opportunities</strong>
+    <p>Help your community find verified ways to earn online — no scams.</p>
+    <button class="btn btn-wa" onclick="shareWhatsApp('earn')">💬 Share This Page</button>
+  </div>
+
+  <div class="bottom-spacer"></div>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('#earn-pills .pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('#earn-pills .pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.getAttribute('data-filter');
+      document.querySelectorAll('.earn-item').forEach(card => {
+        card.style.display = (filter === 'all' || card.getAttribute('data-cat') === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>

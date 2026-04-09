@@ -1,0 +1,196 @@
+---
+// src/pages/contact.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact | SA Life Hub"
+  description="Get in touch with SA Life Hub — report a scam, suggest content, or ask about advertising and partnerships."
+  activeNav="home"
+>
+  <style>
+    .contact-section { padding: 24px 20px 0; }
+    .contact-section h2 {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 14px;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 12px;
+    }
+    .contact-card-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
+    }
+    .contact-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .ci-wa    { background: rgba(37,211,102,0.15); }
+    .ci-scam  { background: rgba(248,113,113,0.12); }
+    .ci-biz   { background: rgba(245,200,66,0.12); }
+    .ci-gen   { background: rgba(96,165,250,0.12); }
+
+    .contact-card h3 { font-family: var(--font-head); font-weight: 700; font-size: 0.92rem; }
+    .contact-card p  { font-size: 0.78rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+
+    .hotlines {
+      margin: 0 20px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .hotlines-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hotline-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+    .hotline-row:last-child { border-bottom: none; }
+    .hotline-name  { color: var(--muted); }
+    .hotline-num   { font-family: var(--font-head); font-weight: 700; color: var(--gold); }
+    .hotline-free  { font-size: 0.65rem; color: var(--green2); background: rgba(36,160,100,0.12); border: 1px solid rgba(36,160,100,0.3); padding: 2px 7px; border-radius: 100px; }
+  </style>
+
+  <div class="page-header">
+    <a href="/" class="back-btn" aria-label="Back to home">←</a>
+    <div class="page-header-text">
+      <h2>Contact Us</h2>
+      <p>We're a small team — response within 24–48h</p>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <h2>How can we help?</h2>
+
+    <div class="contact-card">
+      <div class="contact-card-header">
+        <div class="contact-icon ci-wa">💬</div>
+        <h3>General Enquiries — WhatsApp</h3>
+      </div>
+      <p>For quickest response, reach us on WhatsApp. We respond to questions about our guides, digital products, and site content.</p>
+      <a
+        class="btn btn-wa"
+        style="font-size:0.8rem;padding:10px 16px;"
+        href="https://wa.me/27000000000?text=Hi%20SA%20Life%20Hub%2C%20I%20have%20a%20question%20about..."
+        target="_blank"
+        rel="noopener"
+      >
+        💬 Chat on WhatsApp
+      </a>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-card-header">
+        <div class="contact-icon ci-scam">🚨</div>
+        <h3>Report a Scam or Fake News</h3>
+      </div>
+      <p>Spotted a new scam targeting South Africans? Send us the details — we'll investigate and add it to the Scam Radar to protect the community.</p>
+      <a
+        class="btn btn-outline"
+        style="font-size:0.8rem;padding:10px 16px;border-color:#f87171;color:#f87171;"
+        href="https://wa.me/27000000000?text=SCAM%20REPORT%3A%20I%20want%20to%20report%20a%20scam..."
+        target="_blank"
+        rel="noopener"
+      >
+        ⚠️ Report a Scam
+      </a>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-card-header">
+        <div class="contact-icon ci-biz">🤝</div>
+        <h3>Partnerships & Advertising</h3>
+      </div>
+      <p>Interested in reaching South Africans on SA Life Hub? We only partner with brands that genuinely serve our audience. No scam products, no misleading ads.</p>
+      <a
+        class="btn btn-gold"
+        style="font-size:0.8rem;padding:10px 16px;"
+        href="https://wa.me/27000000000?text=Partnership%20enquiry%3A%20I'm%20interested%20in%20advertising%20on%20SA%20Life%20Hub..."
+        target="_blank"
+        rel="noopener"
+      >
+        📩 Partner Enquiry
+      </a>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-card-header">
+        <div class="contact-icon ci-gen">📝</div>
+        <h3>Suggest Content or a Guide</h3>
+      </div>
+      <p>Is there a government service, earning opportunity, or topic you'd like us to cover? We prioritise suggestions from our community.</p>
+      <a
+        class="btn btn-outline"
+        style="font-size:0.8rem;padding:10px 16px;"
+        href="https://wa.me/27000000000?text=Content%20suggestion%3A%20I%20would%20like%20you%20to%20cover..."
+        target="_blank"
+        rel="noopener"
+      >
+        💡 Suggest a Topic
+      </a>
+    </div>
+  </div>
+
+  <!-- Official SA hotlines for reference -->
+  <div class="contact-section" style="padding-bottom:16px;">
+    <h2>🇿🇦 Official SA Helplines</h2>
+  </div>
+  <div class="hotlines">
+    <div class="hotlines-title">Government Contact Numbers</div>
+    <div class="hotline-row">
+      <span class="hotline-name">SASSA Helpline</span>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="hotline-free">FREE</span>
+        <span class="hotline-num">0800 60 10 11</span>
+      </div>
+    </div>
+    <div class="hotline-row">
+      <span class="hotline-name">NSFAS</span>
+      <span class="hotline-num">0800 067 327</span>
+    </div>
+    <div class="hotline-row">
+      <span class="hotline-name">SARS Contact Centre</span>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="hotline-free">FREE</span>
+        <span class="hotline-num">0800 00 7277</span>
+      </div>
+    </div>
+    <div class="hotline-row">
+      <span class="hotline-name">Home Affairs</span>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="hotline-free">FREE</span>
+        <span class="hotline-num">0800 60 11 90</span>
+      </div>
+    </div>
+    <div class="hotline-row">
+      <span class="hotline-name">Dept. of Labour (UIF)</span>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="hotline-free">FREE</span>
+        <span class="hotline-num">0800 843 843</span>
+      </div>
+    </div>
+    <div class="hotline-row">
+      <span class="hotline-name">SAPS Emergency</span>
+      <span class="hotline-num">10111</span>
+    </div>
+  </div>
+
+  <div class="bottom-spacer"></div>
+</BaseLayout>

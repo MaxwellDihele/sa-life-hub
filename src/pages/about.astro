@@ -1,0 +1,188 @@
+---
+// src/pages/about.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About SA Life Hub | Built by RealMaxG"
+  description="SA Life Hub is South Africa's trusted digital platform for government help, earning opportunities, digital products and scam alerts. Built by RealMaxG."
+  activeNav="home"
+>
+  <style>
+    .about-hero {
+      padding: 32px 20px 24px;
+      background: linear-gradient(180deg, rgba(245,200,66,0.07) 0%, transparent 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .about-hero h1 {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+    .about-hero h1 span { color: var(--gold); }
+    .about-hero p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    .about-section { padding: 24px 20px 0; }
+    .about-section h2 {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .about-section p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .founder-card {
+      margin: 24px 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+    .founder-avatar {
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, #3d2e00, #8a6a00);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+    }
+    .founder-name {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .founder-role {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .founder-bio {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .mission-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 0 20px 24px;
+    }
+    .pillar {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .pillar-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+    .pillar-text h3 { font-family: var(--font-head); font-weight: 700; font-size: 0.88rem; margin-bottom: 3px; }
+    .pillar-text p  { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+
+    .disclaimer {
+      margin: 0 20px 24px;
+      padding: 14px;
+      background: rgba(245,200,66,0.06);
+      border: 1px solid rgba(245,200,66,0.2);
+      border-radius: var(--radius-sm);
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .disclaimer strong { color: var(--white); }
+  </style>
+
+  <div class="page-header">
+    <a href="/" class="back-btn" aria-label="Back to home">←</a>
+    <div class="page-header-text">
+      <h2>About SA Life Hub</h2>
+      <p>Our mission & the person behind the platform</p>
+    </div>
+  </div>
+
+  <div class="about-hero">
+    <h1>Built for <span>South Africans</span>.<br/>By a South African.</h1>
+    <p>SA Life Hub exists because too many South Africans lose money to scams, miss out on grants they're entitled to, and can't find clear answers to basic questions about government services.</p>
+  </div>
+
+  <!-- Mission pillars -->
+  <div class="about-section">
+    <h2>🎯 What We Do</h2>
+  </div>
+  <div class="mission-pillars">
+    <div class="pillar">
+      <div class="pillar-icon">🏛️</div>
+      <div class="pillar-text">
+        <h3>Government Help — Simplified</h3>
+        <p>We translate confusing government processes into plain, step-by-step guides anyone can follow from a phone.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">💰</div>
+      <div class="pillar-text">
+        <h3>Verified Earning Opportunities</h3>
+        <p>Every opportunity we share is tested and verified. No MLMs, no upfront fees, no pyramid schemes — ever.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">⚠️</div>
+      <div class="pillar-text">
+        <h3>Scam & Fake News Radar</h3>
+        <p>We track and bust scams targeting South Africans — especially those targeting grant recipients and job seekers.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">📦</div>
+      <div class="pillar-text">
+        <h3>Affordable Digital Tools</h3>
+        <p>Professional CV templates, business kits, and freelance guides — at prices South Africans can actually afford.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Founder -->
+  <div class="founder-card">
+    <div class="founder-avatar">👨‍💻</div>
+    <div class="founder-name">RealMaxG</div>
+    <div class="founder-role">Founder · Developer · Researcher</div>
+    <p class="founder-bio">
+      I built SA Life Hub after seeing too many people in my community get scammed, miss SASSA payments because of confusing processes, or give up on opportunities because the information wasn't accessible.<br/><br/>
+      My goal is simple: filter out the noise and give South Africans the clear, actionable information they need — for free. The digital products fund the platform so the guides stay free forever.
+    </p>
+  </div>
+
+  <!-- Values -->
+  <div class="about-section">
+    <h2>📋 Our Principles</h2>
+    <p>We only share opportunities and information we would use ourselves. We never take money to promote products or services. We never share unverified information. We never charge for government service guides.</p>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <strong>Disclaimer:</strong> SA Life Hub is not affiliated with, endorsed by, or officially connected to SASSA, NSFAS, SARS, the Department of Home Affairs, or any South African government body. All guides are for informational purposes. Always verify important information on official government websites.
+  </div>
+
+  <div class="wa-cta">
+    <strong>📲 Share SA Life Hub</strong>
+    <p>Help someone in your community access the help they need.</p>
+    <button class="btn btn-wa" onclick="shareWhatsApp('home')">💬 Share with Friends</button>
+  </div>
+
+  <div class="bottom-spacer"></div>
+</BaseLayout>

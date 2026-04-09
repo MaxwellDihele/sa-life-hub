@@ -1,0 +1,393 @@
+---
+// src/pages/radar.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="SA Updates & Scam Radar | SA Life Hub"
+  description="SASSA grant updates, SARS tax dates, government news, and active scam alerts for South Africans. Stay protected and informed."
+  activeNav="radar"
+>
+  <style>
+    .section-divider {
+      display: flex; align-items: center; gap: 8px;
+      padding: 18px 20px 4px;
+    }
+    .section-divider-bar { width: 3px; height: 18px; border-radius: 2px; }
+    .section-divider span { font-family: var(--font-head); font-weight: 700; font-size: 0.9rem; }
+
+    .radar-info-box {
+      border-radius: var(--radius-sm); padding: 10px 12px;
+      font-size: 0.76rem; line-height: 1.6; margin-bottom: 10px;
+    }
+    .info-blue  { background: rgba(96,165,250,0.07);  border: 1px solid rgba(96,165,250,0.2); }
+    .info-gold  { background: rgba(245,200,66,0.07);  border: 1px solid rgba(245,200,66,0.2); }
+    .info-dark  { background: var(--black2);           border: 1px solid var(--border); }
+    .info-green { background: rgba(36,160,100,0.07);  border: 1px solid rgba(36,160,100,0.2); }
+    .info-red   { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.2); }
+
+    .scam-card  { border-left: 3px solid #f87171 !important; border-color: rgba(248,113,113,0.25) !important; }
+  </style>
+
+  <div class="page-header">
+    <a href="/" class="back-btn" aria-label="Back to home">←</a>
+    <div class="page-header-text">
+      <h2>⚠️ SA Updates &amp; Radar</h2>
+      <p>Grants · Gov · SARS · Scam Alerts</p>
+    </div>
+  </div>
+
+  <div class="section-hero red-tint" style="padding-bottom:16px;">
+    <p style="font-size:0.76rem;color:var(--muted);margin-bottom:10px;">Tap a category to filter. Share any alert directly to WhatsApp.</p>
+    <div class="pill-row" id="radar-pills">
+      <div class="pill active" data-filter="all">All</div>
+      <div class="pill" data-filter="sassa">SASSA</div>
+      <div class="pill" data-filter="gov">Gov Updates</div>
+      <div class="pill" data-filter="sars">SARS</div>
+      <div class="pill" data-filter="scam">⚠️ Scam Radar</div>
+    </div>
+  </div>
+
+  <!-- ══ SASSA SECTION ══ -->
+  <div class="section-divider radar-section-header" data-section="sassa">
+    <div class="section-divider-bar" style="background:#60a5fa;"></div>
+    <span style="color:#60a5fa;">SASSA Grant Updates</span>
+  </div>
+  <div class="service-list" style="padding-top:0;">
+
+    <div class="trend-card radar-item" data-cat="sassa" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">💳</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta">
+            <span class="trend-tag" style="background:rgba(96,165,250,0.12);color:#60a5fa;border-color:rgba(96,165,250,0.3);">SASSA</span>
+            <span>April 2025</span>
+          </div>
+          <h3>SRD R370 Payment Dates — April 2025 Confirmed</h3>
+          <p>SASSA confirmed April payment dates for the R370 SRD grant. Payments are processed from 25 March. If yours hasn't arrived, check your status at srd.sassa.gov.za before calling the helpline.</p>
+          <div class="radar-info-box info-blue">
+            📅 <strong style="color:#60a5fa;">Pay window:</strong> 25 March – 30 April 2025<br/>
+            📞 <strong style="color:#60a5fa;">SASSA Helpline:</strong> 0800 60 10 11 (free)<br/>
+            🌐 <strong style="color:#60a5fa;">Check status:</strong> srd.sassa.gov.za
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a class="btn btn-outline" style="font-size:0.72rem;padding:8px 12px;" href="https://srd.sassa.gov.za" target="_blank" rel="noopener">Check My Status →</a>
+            <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;" onclick="shareWhatsApp('sassa-dates')">💬 Share Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trend-card radar-item" data-cat="sassa" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">🔄</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta">
+            <span class="trend-tag" style="background:rgba(96,165,250,0.12);color:#60a5fa;border-color:rgba(96,165,250,0.3);">SASSA</span>
+            <span>This week</span>
+          </div>
+          <h3>SASSA SRD Reapplication — Who Needs to Reapply?</h3>
+          <p>Many beneficiaries whose applications "lapsed" during 2024 must reapply. SASSA does NOT automatically renew if your banking details changed or you missed the reconsideration window.</p>
+          <div class="radar-info-box info-gold">
+            ✅ You must reapply if:<br/>
+            • Your application shows "Lapsed" or "Cancelled"<br/>
+            • Your bank account changed<br/>
+            • You didn't get paid for 3+ months
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a class="btn btn-outline" style="font-size:0.72rem;padding:8px 12px;" href="https://srd.sassa.gov.za" target="_blank" rel="noopener">Reapply Now →</a>
+            <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;" onclick="shareWhatsApp('sassa-reapply')">💬 Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trend-card radar-item" data-cat="sassa" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">👵</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta">
+            <span class="trend-tag" style="background:rgba(96,165,250,0.12);color:#60a5fa;border-color:rgba(96,165,250,0.3);">SASSA</span>
+            <span>Ongoing</span>
+          </div>
+          <h3>Older Person's Grant &amp; Child Support — 2025 Amounts</h3>
+          <p>Grant amounts increased in April 2025. Make sure your beneficiaries are receiving the updated amounts.</p>
+          <div class="radar-info-box info-dark" style="line-height:1.8;">
+            👴 Older Person's Grant: <strong style="color:var(--gold);">R2,185/month</strong><br/>
+            👶 Child Support Grant: <strong style="color:var(--gold);">R530/month</strong><br/>
+            ♿ Disability Grant: <strong style="color:var(--gold);">R2,185/month</strong><br/>
+            🍼 Care Dependency: <strong style="color:var(--gold);">R2,185/month</strong>
+          </div>
+          <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;" onclick="shareWhatsApp('sassa-amounts')">💬 Share These Amounts</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ GOV UPDATES SECTION ══ -->
+  <div class="section-divider radar-section-header" data-section="gov">
+    <div class="section-divider-bar" style="background:var(--green2);"></div>
+    <span style="color:var(--green2);">Government Updates</span>
+  </div>
+  <div class="service-list" style="padding-top:0;">
+
+    <div class="trend-card radar-item" data-cat="gov" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">🏥</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta">
+            <span class="trend-tag" style="background:rgba(36,160,100,0.12);color:var(--green2);border-color:rgba(36,160,100,0.3);">NHI</span>
+            <span>2025</span>
+          </div>
+          <h3>NHI Update — What Will Change for South Africans?</h3>
+          <p>The National Health Insurance Act is in implementation phase. Government aims to provide free basic healthcare to all SA residents. Private medical aids will still exist but their role changes.</p>
+          <div class="radar-info-box info-green">
+            📌 NHI will NOT remove your medical aid immediately<br/>
+            📌 Full rollout expected over 10+ years<br/>
+            📌 Public hospitals will be upgraded first<br/>
+            🌐 More info: health.gov.za
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a class="btn btn-outline" style="font-size:0.72rem;padding:8px 12px;" href="https://www.health.gov.za/nhi/" target="_blank" rel="noopener">Official NHI Page →</a>
+            <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;" onclick="shareWhatsApp('nhi')">💬 Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trend-card radar-item" data-cat="gov" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">📋</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta">
+            <span class="trend-tag" style="background:rgba(36,160,100,0.12);color:var(--green2);border-color:rgba(36,160,100,0.3);">DHA</span>
+            <span>April 2025</span>
+          </div>
+          <h3>Home Affairs: Smart ID Backlog — Expect 8–12 Weeks</h3>
+          <p>DHA confirmed a backlog of over 400,000 Smart ID applications. Priority is given to first-time applicants and matric students. Collection times have extended in some regions.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+            <a class="btn btn-outline" style="font-size:0.72rem;padding:8px 12px;" href="https://www.ehomeaffairs.gov.za" target="_blank" rel="noopener">Track Application →</a>
+            <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;" onclick="shareWhatsApp('dha-backlog')">💬 Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trend-card radar-item" data-cat="gov" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">🎓</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta">
+            <span class="trend-tag" style="background:rgba(36,160,100,0.12);color:var(--green2);border-color:rgba(36,160,100,0.3);">NSFAS</span>
+            <span>This month</span>
+          </div>
+          <h3>NSFAS 2025 Allowance Delays Explained</h3>
+          <p>Many students report late allowance payments. Delays are due to institutional data verification. If your payment is late, contact your institution's financial aid office first — not just NSFAS directly.</p>
+          <div class="radar-info-box info-gold">
+            ⚠️ Do NOT pay anyone claiming to "fast-track" your NSFAS. This is a scam.
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a class="btn btn-outline" style="font-size:0.72rem;padding:8px 12px;" href="https://my.nsfas.org.za" target="_blank" rel="noopener">Check myNSFAS →</a>
+            <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;" onclick="shareWhatsApp('nsfas-delay')">💬 Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ SARS SECTION ══ -->
+  <div class="section-divider radar-section-header" data-section="sars">
+    <div class="section-divider-bar" style="background:var(--gold);"></div>
+    <span style="color:var(--gold);">SARS Tax Updates</span>
+  </div>
+  <div class="service-list" style="padding-top:0;">
+
+    <div class="trend-card radar-item" data-cat="sars" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">📊</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta">
+            <span class="trend-tag" style="background:rgba(245,200,66,0.12);color:var(--gold);border-color:rgba(245,200,66,0.3);">SARS</span>
+            <span>2025 Tax Year</span>
+          </div>
+          <h3>Tax Filing Season 2025 — Key Dates You Must Know</h3>
+          <p>SARS opens the 2025 filing season in July. If you earned income and didn't submit last year, SARS may contact you via SMS. Don't ignore these.</p>
+          <div class="radar-info-box info-dark" style="line-height:1.8;">
+            📅 <strong style="color:var(--gold);">Auto-assessment:</strong> July 2025<br/>
+            📅 <strong style="color:var(--gold);">Filing opens:</strong> 1 July 2025<br/>
+            📅 <strong style="color:var(--gold);">Non-provisional deadline:</strong> 20 October 2025<br/>
+            📅 <strong style="color:var(--gold);">Provisional taxpayers:</strong> 20 January 2026
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a class="btn btn-outline" style="font-size:0.72rem;padding:8px 12px;" href="https://www.sars.gov.za/individuals/tax-season/" target="_blank" rel="noopener">SARS eFiling →</a>
+            <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;" onclick="shareWhatsApp('sars-dates')">💬 Share Dates</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trend-card radar-item" data-cat="sars" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">💰</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta">
+            <span class="trend-tag" style="background:rgba(245,200,66,0.12);color:var(--gold);border-color:rgba(245,200,66,0.3);">SARS</span>
+            <span>2025 Budget</span>
+          </div>
+          <h3>2025 Tax Thresholds — Do You Need to File?</h3>
+          <p>Many South Africans don't know that below the threshold you may not need to file — but you still can to claim a refund.</p>
+          <div class="radar-info-box info-dark" style="line-height:1.8;">
+            <strong style="color:var(--white);">You MUST file if you earn above:</strong><br/>
+            👤 Under 65: <strong style="color:var(--gold);">R95,750/year</strong><br/>
+            👴 65–74: <strong style="color:var(--gold);">R148,217/year</strong><br/>
+            👵 75+: <strong style="color:var(--gold);">R165,689/year</strong>
+          </div>
+          <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;" onclick="shareWhatsApp('sars-threshold')">💬 Share This Info</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="trend-card radar-item" data-cat="sars" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">📱</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta">
+            <span class="trend-tag" style="background:rgba(245,200,66,0.12);color:var(--gold);border-color:rgba(245,200,66,0.3);">SARS</span>
+            <span>Important</span>
+          </div>
+          <h3>SARS MobiApp — File Your Return From Your Phone</h3>
+          <p>The SARS MobiApp lets you file your return, view your account, and track your refund — no office visit needed for most individual taxpayers.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+            <a class="btn btn-outline" style="font-size:0.72rem;padding:8px 12px;" href="https://www.sars.gov.za/mobiapp" target="_blank" rel="noopener">Download MobiApp →</a>
+            <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;" onclick="shareWhatsApp('sars-app')">💬 Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ SCAM RADAR SECTION ══ -->
+  <div class="section-divider radar-section-header" data-section="scam">
+    <div class="section-divider-bar" style="background:#f87171;"></div>
+    <span style="color:#f87171;">⚠️ Scam Radar — Fake News Alert</span>
+  </div>
+  <p style="font-size:0.75rem;color:var(--muted);padding:0 20px 10px;">Share these to protect your community from scams circulating right now.</p>
+  <div class="service-list" style="padding-top:0;">
+
+    <div class="trend-card radar-item scam-card" data-cat="scam" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">🚫</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta"><span class="trend-tag">⚠️ SCAM ALERT</span><span>Active Now</span></div>
+          <h3>"SASSA is giving R1,500 emergency grants" — FAKE</h3>
+          <p>A viral WhatsApp message claims SASSA is distributing a special R1,500 emergency payment. This is <strong style="color:#f87171;">completely false</strong>. The links steal your personal information.</p>
+          <div class="radar-info-box info-red">
+            ✅ <strong style="color:var(--white);">SASSA only communicates via:</strong><br/>
+            • sassa.gov.za (official website)<br/>
+            • 0800 60 10 11 (toll-free helpline)<br/>
+            • Official SASSA offices<br/>
+            ❌ Never via random WhatsApp links or Facebook pages
+          </div>
+          <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;background:#f87171;color:#fff;" onclick="shareWhatsApp('scam-sassa-r1500')">⚠️ Warn Your Community</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="trend-card radar-item scam-card" data-cat="scam" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">🚫</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta"><span class="trend-tag">⚠️ SCAM ALERT</span><span>Active Now</span></div>
+          <h3>"Pay R50 to fast-track your SASSA/NSFAS payment" — SCAM</h3>
+          <p>Fraudsters charge R50–R300 on WhatsApp to "speed up" government payments. No third party can fast-track SASSA or NSFAS payments.</p>
+          <div class="radar-info-box info-red">
+            🔴 Report to SASSA Fraud Hotline: <strong style="color:#f87171;">0800 60 10 11</strong><br/>
+            🔴 Report to SAPS: <strong style="color:#f87171;">10111</strong>
+          </div>
+          <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;background:#f87171;color:#fff;" onclick="shareWhatsApp('scam-fasttrack')">⚠️ Warn Your Community</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="trend-card radar-item scam-card" data-cat="scam" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">🚫</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta"><span class="trend-tag">⚠️ FAKE NEWS</span><span>Circulating Now</span></div>
+          <h3>"SARS is cancelling tax numbers of unemployed people" — FALSE</h3>
+          <p>A message on WhatsApp and TikTok claims SARS cancels tax numbers for people who haven't filed in 2 years. This is <strong style="color:#f87171;">false</strong>. SARS does not cancel tax numbers.</p>
+          <div class="radar-info-box info-red">
+            ✅ Verify any SARS claim at: <strong style="color:var(--white);">sars.gov.za</strong><br/>
+            ✅ SARS Contact Centre: <strong style="color:var(--white);">0800 00 7277</strong>
+          </div>
+          <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;background:#f87171;color:#fff;" onclick="shareWhatsApp('scam-sars-cancel')">⚠️ Warn Your Community</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="trend-card radar-item scam-card" data-cat="scam" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">🚫</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta"><span class="trend-tag">⚠️ SCAM ALERT</span><span>Active Now</span></div>
+          <h3>Fake "Government Jobs" — WhatsApp Application Scam</h3>
+          <p>Fraudsters send fake government job adverts asking applicants to pay R150–R500 for "application processing." Government jobs are always free to apply for.</p>
+          <div class="radar-info-box info-red">
+            ✅ Only apply via: <strong style="color:var(--white);">dpsa.gov.za/vacancies</strong><br/>
+            ❌ Never pay anyone to submit a government job application
+          </div>
+          <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;background:#f87171;color:#fff;" onclick="shareWhatsApp('scam-govjobs')">⚠️ Warn Your Community</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="trend-card radar-item scam-card" data-cat="scam" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">🚫</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta"><span class="trend-tag">⚠️ FAKE NEWS</span><span>Viral on TikTok</span></div>
+          <h3>"Basic Income Grant of R1,500 approved for all citizens" — NOT TRUE</h3>
+          <p>Multiple TikTok and Facebook posts claim Parliament passed a Basic Income Grant of R1,500/month. As of April 2025, <strong style="color:#f87171;">no such law has been passed</strong>.</p>
+          <div class="radar-info-box info-red">
+            📌 The BIG is still a policy proposal<br/>
+            📌 No implementation date has been set<br/>
+            📌 Don't fill in any forms claiming to register you
+          </div>
+          <button class="btn btn-wa" style="font-size:0.72rem;padding:8px 12px;background:#f87171;color:#fff;" onclick="shareWhatsApp('scam-big')">⚠️ Warn Your Community</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Report CTA -->
+    <div style="background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-radius:var(--radius);padding:18px;text-align:center;margin-top:4px;">
+      <div style="font-size:1.4rem;margin-bottom:8px;">🛡️</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:0.9rem;margin-bottom:6px;">Spotted a Scam or Fake News?</div>
+      <p style="font-size:0.75rem;color:var(--muted);line-height:1.55;margin-bottom:14px;">Share this page with your community. Every share could protect someone from losing their money.</p>
+      <button class="btn btn-wa" style="width:100%;justify-content:center;" onclick="shareWhatsApp('scam-radar')">💬 Share Scam Radar Page</button>
+    </div>
+
+  </div>
+  <div class="bottom-spacer"></div>
+</BaseLayout>
+
+<script>
+  // Radar pill filter
+  const pills = document.querySelectorAll('#radar-pills .pill');
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.getAttribute('data-filter');
+
+      document.querySelectorAll('.radar-item').forEach(card => {
+        card.style.display = (filter === 'all' || card.getAttribute('data-cat') === filter) ? '' : 'none';
+      });
+      document.querySelectorAll('.radar-section-header, .radar-section-header + p').forEach(el => {
+        el.style.display = filter === 'all' ? '' : 'none';
+      });
+    });
+  });
+</script>

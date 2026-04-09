@@ -1,0 +1,151 @@
+---
+// src/pages/index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout activeNav="home">
+  <style>
+    /* ── HERO ── */
+    .hero { padding: 36px 20px 28px; position: relative; overflow: hidden; }
+    .hero::after {
+      content: ''; position: absolute; top: -60px; right: -80px;
+      width: 260px; height: 260px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,200,66,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(245,200,66,0.12); border: 1px solid rgba(245,200,66,0.3);
+      color: var(--gold); font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 100px; margin-bottom: 18px;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 6px; height: 6px; background: var(--gold);
+      border-radius: 50%; animation: pulse 1.8s ease-in-out infinite;
+    }
+    .hero h1 { font-family: var(--font-head); font-weight: 800; font-size: 2.4rem; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .hero h1 em { font-style: normal; color: var(--gold); }
+    .hero p { font-size: 0.92rem; color: var(--muted); line-height: 1.6; max-width: 340px; margin-bottom: 24px; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* ── NAV CARDS ── */
+    .nav-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 20px 32px; }
+    .nav-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 16px;
+      text-decoration: none; color: var(--white);
+      display: flex; flex-direction: column; gap: 10px;
+      transition: all 0.2s ease; position: relative; overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-card:hover, .nav-card:active { border-color: var(--gold); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .nav-card .card-icon  { font-size: 1.8rem; line-height: 1; }
+    .nav-card .card-title { font-family: var(--font-head); font-weight: 700; font-size: 0.88rem; line-height: 1.3; }
+    .nav-card .card-desc  { font-size: 0.73rem; color: var(--muted); line-height: 1.5; }
+    .nav-card .card-cta   { margin-top: 4px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+    .card-gov   { border-top: 3px solid #60a5fa; } .card-gov  .card-cta { color: #60a5fa; }
+    .card-earn  { border-top: 3px solid var(--gold); } .card-earn .card-cta { color: var(--gold); }
+    .card-store { border-top: 3px solid var(--green2); } .card-store .card-cta { color: var(--green2); }
+    .card-trend { border-top: 3px solid #f87171; } .card-trend .card-cta { color: #f87171; }
+
+    /* ── FOUNDER STRIP ── */
+    .founder-strip {
+      margin: 0 20px 20px; padding: 16px;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); font-size: 0.78rem; line-height: 1.6; color: var(--muted);
+    }
+    .founder-strip strong { color: var(--white); font-family: var(--font-head); font-size: 0.88rem; }
+  </style>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">🇿🇦 Built for South Africans</div>
+    <h1>Earn. Access.<br /><em>Stay Informed.</em></h1>
+    <p>Your all-in-one digital hub for government help, real earning opportunities, digital tools, and SA scam alerts.</p>
+    <div class="hero-actions">
+      <a href="/earn" class="btn btn-gold">💰 Start Earning</a>
+      <a href="/gov"  class="btn btn-outline">🏛️ Get Help</a>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item"><span class="stat-num">50K+</span><span class="stat-label">South Africans Helped</span></div>
+    <div class="stat-item"><span class="stat-num">R200+</span><span class="stat-label">Avg Daily Earn</span></div>
+    <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Free to Browse</span></div>
+  </div>
+
+  <!-- ALERT BANNER -->
+  <div class="alert-banner">
+    🔔 <strong>April 2025:</strong> SASSA SRD payment dates confirmed. NSFAS appeals window open. New scam targeting grant recipients — see Radar.
+  </div>
+
+  <!-- 4 NAV CARDS -->
+  <div class="nav-cards">
+    <a href="/gov"   class="nav-card card-gov">
+      <div class="card-icon">🏛️</div>
+      <div class="card-title">Government &amp; Admin Help</div>
+      <div class="card-desc">SASSA, NSFAS, UIF, ID &amp; more</div>
+      <div class="card-cta">→ Get Help</div>
+    </a>
+    <a href="/earn"  class="nav-card card-earn">
+      <div class="card-icon">💰</div>
+      <div class="card-title">Online Opportunities</div>
+      <div class="card-desc">Real side hustles for SA</div>
+      <div class="card-cta">→ Start Earning</div>
+    </a>
+    <a href="/store" class="nav-card card-store">
+      <div class="card-icon">📦</div>
+      <div class="card-title">Digital Store</div>
+      <div class="card-desc">CV templates, business kits</div>
+      <div class="card-cta">→ Browse Store</div>
+    </a>
+    <a href="/radar" class="nav-card card-trend">
+      <div class="card-icon">⚠️</div>
+      <div class="card-title">SA Updates &amp; Scam Radar</div>
+      <div class="card-desc">SASSA · SARS · Gov · Scams</div>
+      <div class="card-cta">→ Stay Informed</div>
+    </a>
+  </div>
+
+  <!-- WHATSAPP CTA -->
+  <div class="wa-cta">
+    <strong>📲 Know someone who needs this?</strong>
+    <p>Share SA Life Hub with a friend on WhatsApp — help them find real opportunities and government services.</p>
+    <button class="btn btn-wa" onclick="shareWhatsApp('home')">💬 Share on WhatsApp</button>
+  </div>
+
+  <!-- TRENDING PREVIEW -->
+  <div class="section">
+    <div class="section-label">
+      <h2>⚠️ Latest Radar Alert</h2>
+      <a href="/radar">See all →</a>
+    </div>
+    <div class="trend-card" style="flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="trend-emoji">🚫</div>
+        <div class="trend-body" style="flex:1;">
+          <div class="trend-meta">
+            <span class="trend-tag">⚠️ Scam Alert</span>
+            <span>Active Now</span>
+          </div>
+          <h3>"SASSA R1,500 emergency grant" spreading on WhatsApp — It's FAKE</h3>
+          <p>Protect your family. See our full Scam Radar with verified government links.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <a href="/radar" class="btn btn-outline" style="padding:8px 14px;font-size:0.72rem;flex:1;">View All Alerts →</a>
+        <button class="btn btn-wa" style="padding:8px 14px;font-size:0.72rem;" onclick="shareWhatsApp('scam-sassa-r1500')">⚠️ Warn</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOUNDER STRIP -->
+  <div class="founder-strip">
+    <strong>Built by RealMaxG 🛠️</strong><br/>
+    Developer &amp; researcher filtering real opportunities from noise and scams — so you don't have to.
+  </div>
+
+  <div class="bottom-spacer"></div>
+</BaseLayout>
