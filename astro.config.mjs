@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config';
+import node from '@astrojs/node';
 
 export default defineConfig({
-  output: 'static',
-  // Uncomment when deploying — needed for sitemap + OG tags:
-  // site: 'https://salifehub.co.za',
+  // Switch to server mode so pages can fetch Supabase data on every request
+  output: 'server',
+  adapter: node({ mode: 'standalone' }),
 
-  // Add sitemap after install: npm install @astrojs/sitemap
-  // integrations: [sitemap()],
+  // Uncomment when deploying:
+  // site: 'https://salifehub.co.za',
 });

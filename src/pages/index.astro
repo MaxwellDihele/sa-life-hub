@@ -1,6 +1,13 @@
 ---
 // src/pages/index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLatestAlerts } from '../lib/supabase';
+import type { RadarAlert } from '../lib/supabase';
+
+// Fetch the 3 most recent active alerts for the home preview
+const latestAlerts = await getLatestAlerts(3);
+// Highlight the most recent scam alert if any, otherwise first alert
+const heroAlert = latestAlerts.find(a => a.category === 'scam') ?? latestAlerts[0];
 ---
 
 <BaseLayout activeNav="home">
@@ -116,29 +123,65 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <button class="btn btn-wa" onclick="shareWhatsApp('home')">💬 Share on WhatsApp</button>
   </div>
 
-  <!-- TRENDING PREVIEW -->
+  <!-- LIVE RADAR PREVIEW from Supabase -->
   <div class="section">
     <div class="section-label">
       <h2>⚠️ Latest Radar Alert</h2>
       <a href="/radar">See all →</a>
     </div>
-    <div class="trend-card" style="flex-direction:column;gap:10px;">
-      <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div class="trend-emoji">🚫</div>
-        <div class="trend-body" style="flex:1;">
-          <div class="trend-meta">
-            <span class="trend-tag">⚠️ Scam Alert</span>
-            <span>Active Now</span>
+
+    {heroAlert ? (
+      <div class="trend-card" style="flex-direction:column;gap:10px;">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="trend-emoji">{heroAlert.emoji}</div>
+          <div class="trend-body" style="flex:1;">
+            <div class="trend-meta">
+              <span class="trend-tag">{heroAlert.tag_label}</span>
+              <span>{heroAlert.date_label}</span>
+            </div>
+            <h3>{heroAlert.title}</h3>
+            <p set:html={heroAlert.body.substring(0, 120) + (heroAlert.body.length > 120 ? '…' : '')} />
           </div>
-          <h3>"SASSA R1,500 emergency grant" spreading on WhatsApp — It's FAKE</h3>
-          <p>Protect your family. See our full Scam Radar with verified government links.</p>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <a href="/radar" class="btn btn-outline" style="padding:8px 14px;font-size:0.72rem;flex:1;">View All Alerts →</a>
+          <button
+            class="btn btn-wa"
+            style={`padding:8px 14px;font-size:0.72rem;${heroAlert.warn_btn ? 'background:#f87171;' : ''}`}
+            data-wa-key={heroAlert.share_key}
+          >
+            {heroAlert.warn_btn ? '⚠️ Warn' : '💬 Share'}
+          </button>
         </div>
       </div>
-      <div style="display:flex;gap:8px;">
-        <a href="/radar" class="btn btn-outline" style="padding:8px 14px;font-size:0.72rem;flex:1;">View All Alerts →</a>
-        <button class="btn btn-wa" style="padding:8px 14px;font-size:0.72rem;" onclick="shareWhatsApp('scam-sassa-r1500')">⚠️ Warn</button>
+    ) : (
+      <div class="trend-card" style="flex-direction:column;gap:10px;">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="trend-emoji">🚫</div>
+          <div class="trend-body" style="flex:1;">
+            <div class="trend-meta"><span class="trend-tag">⚠️ Scam Alert</span><span>Active Now</span></div>
+            <h3>"SASSA R1,500 emergency grant" spreading on WhatsApp — It's FAKE</h3>
+            <p>Protect your family. See our full Scam Radar with verified government links.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <a href="/radar" class="btn btn-outline" style="padding:8px 14px;font-size:0.72rem;flex:1;">View All Alerts →</a>
+          <button class="btn btn-wa" style="padding:8px 14px;font-size:0.72rem;background:#f87171;" data-wa-key="scam-sassa-r1500">⚠️ Warn</button>
+        </div>
       </div>
-    </div>
+    )}
+
+    <!-- Mini list of other recent alerts -->
+    {latestAlerts.filter(a => a.id !== heroAlert?.id).map((alert: RadarAlert) => (
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+        <span style="font-size:1.2rem;">{alert.emoji}</span>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:0.78rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{alert.title}</div>
+          <div style="font-size:0.68rem;color:var(--muted);">{alert.date_label}</div>
+        </div>
+        <a href="/radar" style="font-size:0.7rem;color:var(--gold);text-decoration:none;flex-shrink:0;">→</a>
+      </div>
+    ))}
   </div>
 
   <!-- FOUNDER STRIP -->

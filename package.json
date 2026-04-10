@@ -6,9 +6,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "start": "node ./dist/server/entry.mjs",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.8.0"
+    "astro": "^4.8.0",
+    "@astrojs/node": "^8.3.0",
+    "@supabase/supabase-js": "^2.43.0"
   }
 }
